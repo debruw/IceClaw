@@ -28,7 +28,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5026342226223596752}
   m_LocalRotation: {x: -0.6830127, y: 0.18301274, z: 0.18301274, w: 0.6830127}
-  m_LocalPosition: {x: -0.76556, y: 0, z: -4.9}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -107,3 +107,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df221b81ee8f0064a9689def85bb1321, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  LifeTime: 10
+  GlacierBreaks:
+  - {fileID: 2100000, guid: 4df2ecc9b17165345a2ba0465cedac26, type: 2}
+  - {fileID: 2100000, guid: 4cf8ff9369c876542b28663d1e086881, type: 2}
+  myMeshRenderer: {fileID: 6827980333761504517}
+  IsActive: 0

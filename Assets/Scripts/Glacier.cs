@@ -6,23 +6,56 @@ public class Glacier : MonoBehaviour
 {
     [SerializeField] float LifeTime;
     float timer;
+    int currentState;
+    [SerializeField] Material[] GlacierBreaks;
+    [SerializeField] MeshRenderer myMeshRenderer;
+    public bool IsActive;
 
     private void Start()
     {
         timer = LifeTime;
+        if (IsActive)
+        {
+            StartCoroutine(WaitAndBreak(LifeTime / 3));
+        }
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        timer -= Time.deltaTime;
-        if (timer <= 0)
+        if (IsActive)
         {
-            Debug.Log("Öldü");
+            timer -= Time.deltaTime;
         }
-        else if (timer < LifeTime / 2)
-        {
+    }
 
+    IEnumerator WaitAndBreak(float time)
+    {
+        if (timer > 0 && IsActive)
+        {
+            yield return new WaitForSeconds(time);
+            currentState++;
+            switch (currentState)
+            {
+                case 1:
+                    myMeshRenderer.material = GlacierBreaks[0];
+                    break;
+                case 2:
+                    myMeshRenderer.material = GlacierBreaks[1];
+                    break;
+                case 3:
+                    IsActive = false;
+                    Destroy(gameObject);
+                    break;
+            }
+            StartCoroutine(WaitAndBreak(LifeTime / 3));
         }
+    }
+
+    public void ActivateObject(Transform emptySlot)
+    {
+        GetComponent<Collider>().enabled = false;
+        IsActive = true;
+        transform.position = emptySlot.position;
+        StartCoroutine(WaitAndBreak(LifeTime / 3));
     }
 }
