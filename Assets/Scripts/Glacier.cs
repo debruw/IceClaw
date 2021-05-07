@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 public class Glacier : MonoBehaviour
 {
@@ -9,7 +10,11 @@ public class Glacier : MonoBehaviour
     int currentState;
     [SerializeField] Material[] GlacierBreaks;
     [SerializeField] MeshRenderer myMeshRenderer;
+    [SerializeField] GameObject BrokenGlacier;
     public bool IsActive;
+    [SerializeField] GameObject[] FallOneObjs;
+    [SerializeField] GameObject[] FallTwoObjs;
+    [SerializeField] GameObject[] DestroyObjs;
 
     private void Start()
     {
@@ -37,14 +42,15 @@ public class Glacier : MonoBehaviour
             switch (currentState)
             {
                 case 1:
-                    myMeshRenderer.material = GlacierBreaks[0];
+                    BrokenGlacier.SetActive(true);
+                    myMeshRenderer.enabled = false;
+                    FallOne();
                     break;
                 case 2:
-                    myMeshRenderer.material = GlacierBreaks[1];
+                    FallTwo();
                     break;
                 case 3:
-                    IsActive = false;
-                    Destroy(gameObject);
+                    StartCoroutine(DestroyGlacier());
                     break;
             }
             StartCoroutine(WaitAndBreak(LifeTime / 3));
@@ -55,7 +61,48 @@ public class Glacier : MonoBehaviour
     {
         GetComponent<Collider>().enabled = false;
         IsActive = true;
-        transform.position = emptySlot.position;
+        transform.DOMove(emptySlot.position, .4f);
+               
         StartCoroutine(WaitAndBreak(LifeTime / 3));
+    }
+
+    void FallOne()
+    {
+        myMeshRenderer.material = GlacierBreaks[0];
+        for (int i = 0; i < FallOneObjs.Length; i++)
+        {
+            FallOneObjs[i].GetComponent<Rigidbody>().useGravity = true;
+            FallOneObjs[i].GetComponent<MeshCollider>().enabled = true;
+        }
+    }
+
+    void FallTwo()
+    {
+        myMeshRenderer.material = GlacierBreaks[1];
+        for (int i = 0; i < FallTwoObjs.Length; i++)
+        {
+            FallTwoObjs[i].GetComponent<Rigidbody>().useGravity = true;
+            FallTwoObjs[i].GetComponent<MeshCollider>().enabled = true;
+        }
+    }
+
+    IEnumerator DestroyGlacier()
+    {
+        IsActive = false;
+        for (int i = 0; i < DestroyObjs.Length; i++)
+        {
+            DestroyObjs[i].GetComponent<Rigidbody>().useGravity = true;
+            DestroyObjs[i].GetComponent<MeshCollider>().enabled = true;
+        }
+        yield return new WaitForSeconds(2f);
+        Destroy(gameObject);
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (IsActive && other.CompareTag("Hazard"))
+        {
+            timer = 0;
+        }
     }
 }
