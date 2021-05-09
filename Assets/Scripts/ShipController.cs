@@ -22,4 +22,13 @@ public class ShipController : MonoBehaviour
         }
         transform.position += new Vector3(0, 0, 1) * speed * Time.deltaTime;
     }
+
+    public void BreakLastGlacier()
+    {
+        if (!ShipsGlaciers[1].isLast)
+        {
+            ShipsGlaciers[1].isLast = true;            
+        }
+        ShipsGlaciers[0].BreakAll();
+    }
 }

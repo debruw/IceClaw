@@ -23,7 +23,7 @@ public class CollisionDetection : MonoBehaviour
     {
         yield return new WaitForSeconds(.3f);
         Player.transform.DOLocalMoveZ(
-            Player.transform.localPosition.z + (MoveStep / 2), .5f            
+            Player.transform.localPosition.z + (MoveStep / 2), .5f
             ).OnComplete(() =>
             {
                 EmptySlots[nextSlot].transform.DOLocalMoveZ(EmptySlots[nextSlot].transform.localPosition.z + MoveStep, 0);
@@ -59,7 +59,25 @@ public class CollisionDetection : MonoBehaviour
         }
         else if (other.CompareTag("Hazard"))
         {
-
+            clawController.isActive = false;
+            if (Vector3.Distance(HazardPoint1.position, other.transform.position) < Vector3.Distance(HazardPoint2.position, other.transform.position))
+            {
+                other.transform.DOMove(HazardPoint1.position, .3f);
+                RightIKTarget.DOMoveX(HazardPoint1.position.x, .3f).OnComplete(() =>
+                {
+                    clawController.isActive = true;
+                });
+                RightIKTarget.DOMoveZ(HazardPoint1.position.z, .3f);
+            }
+            else
+            {
+                other.transform.DOMove(HazardPoint2.position, .3f);
+                RightIKTarget.DOMoveX(HazardPoint2.position.x, .3f).OnComplete(() =>
+                {
+                    clawController.isActive = true;
+                });
+                RightIKTarget.DOMoveZ(HazardPoint2.position.z, .3f);
+            }
         }
     }
 }

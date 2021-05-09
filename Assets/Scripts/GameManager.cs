@@ -17,6 +17,7 @@ public class GameManager : MonoBehaviour
     public ShipController m_ShipController;
     public ClawController m_ClawController;
     public CollisionDetection m_CollisionDetection;
+    public CameraShake m_CameraShake;
 
     #region UI Elements
     public GameObject WinPanel, LosePanel, InGamePanel;
@@ -67,7 +68,10 @@ public class GameManager : MonoBehaviour
         LevelText.text = currentLevel.ToString();
     }
 
-
+    public void ShakeCamera()
+    {
+        m_CameraShake.shakeDuration = .2f;
+    }
 
     public IEnumerator WaitAndGameWin()
     {
