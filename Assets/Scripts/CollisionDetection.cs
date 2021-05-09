@@ -5,12 +5,14 @@ using DG.Tweening;
 
 public class CollisionDetection : MonoBehaviour
 {
-    public GameObject GlacierParent;
+    [SerializeField] ShipController shipController;
+    public GameObject Player;
     int nextSlot = 1;
     public GameObject[] EmptySlots;
     float MoveStep;
     [SerializeField] Transform RightIKTarget;
     [SerializeField] ClawController clawController;
+    [SerializeField] Transform HazardPoint1, HazardPoint2;
 
     private void Start()
     {
@@ -20,13 +22,11 @@ public class CollisionDetection : MonoBehaviour
     IEnumerator MovePlayerForward()
     {
         yield return new WaitForSeconds(.3f);
-        GlacierParent.transform.DOMoveZ(
-            GlacierParent.transform.position.z - (
-                                                    MoveStep / 2),
-            .5f
+        Player.transform.DOLocalMoveZ(
+            Player.transform.localPosition.z + (MoveStep / 2), .5f            
             ).OnComplete(() =>
             {
-                EmptySlots[nextSlot].transform.DOMoveZ(EmptySlots[nextSlot].transform.position.z + MoveStep, 0);
+                EmptySlots[nextSlot].transform.DOLocalMoveZ(EmptySlots[nextSlot].transform.localPosition.z + MoveStep, 0);
             });
     }
 
@@ -34,7 +34,7 @@ public class CollisionDetection : MonoBehaviour
     {
         if (other.CompareTag("Glacier"))
         {
-            if (!other.GetComponent<Glacier>().IsActive)
+            if (!other.GetComponent<Glacier>().isPicked)
             {
                 if (nextSlot == 0)
                 {
@@ -53,15 +53,13 @@ public class CollisionDetection : MonoBehaviour
                 other.GetComponent<Glacier>().ActivateObject(EmptySlots[nextSlot].transform);
 
                 StartCoroutine(MovePlayerForward());
+                shipController.ShipsGlaciers.Add(other.GetComponent<Glacier>());
+                other.transform.parent = shipController.transform;
             }
         }
         else if (other.CompareTag("Hazard"))
         {
 
-        }
-        else if (other.CompareTag("FinishLine"))
-        {
-            GlacierParent.transform.DOMoveZ(GlacierParent.transform.position.z - 3, 1f);
         }
     }
 }

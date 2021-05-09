@@ -24,7 +24,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 57761328}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.56, y: 0.12, z: -1.84}
+  m_LocalPosition: {x: 1.87, y: -0.08, z: -1.66}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 8336141295466587128}
@@ -166,7 +166,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1629883276}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.56, y: 0.12, z: 1.66}
+  m_LocalPosition: {x: 1.87, y: -0.08, z: 1.55}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 8336141295466587128}
@@ -516,11 +516,11 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3299618799562177082}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.0052499846, y: 0.015760701, z: 0.014696182}
-  m_Center: {x: -0.00047102486, y: -0.008781881, z: 0.00026089788}
+  m_Size: {x: 0.018473268, y: 0.024923086, z: 0.0146961715}
+  m_Center: {x: -0.000007959943, y: -0.0041906647, z: 0.00026089844}
 --- !u!114 &1409897097
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -533,12 +533,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 422bdbe845ac32e4b9a92ed2eea8e5b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlacierParent: {fileID: 0}
+  shipController: {fileID: 0}
+  Player: {fileID: 0}
   EmptySlots:
   - {fileID: 0}
   - {fileID: 0}
   RightIKTarget: {fileID: 1241447602}
   clawController: {fileID: 1563001310}
+  HazardPoint1: {fileID: 0}
+  HazardPoint2: {fileID: 0}
 --- !u!1 &3946792475916472217
 GameObject:
   m_ObjectHideFlags: 0

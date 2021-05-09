@@ -5,104 +5,76 @@ using DG.Tweening;
 
 public class Glacier : MonoBehaviour
 {
-    [SerializeField] float LifeTime;
+    public float LifeTime;
     float timer;
-    int currentState;
+    int count;
     [SerializeField] Material[] GlacierBreaks;
     [SerializeField] MeshRenderer myMeshRenderer;
     [SerializeField] GameObject BrokenGlacier;
-    public bool IsActive;
-    [SerializeField] GameObject[] FallOneObjs;
-    [SerializeField] GameObject[] FallTwoObjs;
-    [SerializeField] GameObject[] DestroyObjs;
+    public bool isPicked, isLast;
+    [SerializeField] GameObject[] ChildObjects;
 
     private void Start()
     {
-        timer = LifeTime;
-        if (IsActive)
-        {
-            StartCoroutine(WaitAndBreak(LifeTime / 3));
-        }
+        timer = LifeTime / 21;
     }
 
     private void Update()
     {
-        if (IsActive)
+        if (GameManager.Instance.isGameOver || !GameManager.Instance.isGameStarted)
+        {
+            return;
+        }
+        if (isLast)
         {
             timer -= Time.deltaTime;
-        }
-    }
-
-    IEnumerator WaitAndBreak(float time)
-    {
-        if (timer > 0 && IsActive)
-        {
-            yield return new WaitForSeconds(time);
-            currentState++;
-            switch (currentState)
+            if (timer <= 0 && count <= 20)
             {
-                case 1:
-                    BrokenGlacier.SetActive(true);
+                if (count == 0)
+                {
                     myMeshRenderer.enabled = false;
-                    FallOne();
-                    break;
-                case 2:
-                    FallTwo();
-                    break;
-                case 3:
-                    StartCoroutine(DestroyGlacier());
-                    break;
+                    myMeshRenderer.GetComponent<Collider>().enabled = false;
+                    BrokenGlacier.SetActive(true);
+                }
+                if (count == 10)
+                {
+                    GameManager.Instance.m_ShipController.ShipsGlaciers[1].isLast = true;
+                }
+                timer = LifeTime / 21;
+
+                ChildObjects[count].GetComponent<Rigidbody>().useGravity = true;
+                count++;
+                if (count > 20)
+                {
+                    GameManager.Instance.m_ShipController.ShipsGlaciers.Remove(this);
+                    GameManager.Instance.m_ClawController.CheckGround();
+                    Destroy(gameObject);
+                }
             }
-            StartCoroutine(WaitAndBreak(LifeTime / 3));
         }
     }
 
     public void ActivateObject(Transform emptySlot)
     {
-        GetComponent<Collider>().enabled = false;
-        IsActive = true;
+        isPicked = true;
         transform.DOMove(emptySlot.position, .4f);
-               
-        StartCoroutine(WaitAndBreak(LifeTime / 3));
-    }
-
-    void FallOne()
-    {
-        myMeshRenderer.material = GlacierBreaks[0];
-        for (int i = 0; i < FallOneObjs.Length; i++)
-        {
-            FallOneObjs[i].GetComponent<Rigidbody>().useGravity = true;
-            FallOneObjs[i].GetComponent<MeshCollider>().enabled = true;
-        }
-    }
-
-    void FallTwo()
-    {
-        myMeshRenderer.material = GlacierBreaks[1];
-        for (int i = 0; i < FallTwoObjs.Length; i++)
-        {
-            FallTwoObjs[i].GetComponent<Rigidbody>().useGravity = true;
-            FallTwoObjs[i].GetComponent<MeshCollider>().enabled = true;
-        }
-    }
-
-    IEnumerator DestroyGlacier()
-    {
-        IsActive = false;
-        for (int i = 0; i < DestroyObjs.Length; i++)
-        {
-            DestroyObjs[i].GetComponent<Rigidbody>().useGravity = true;
-            DestroyObjs[i].GetComponent<MeshCollider>().enabled = true;
-        }
-        yield return new WaitForSeconds(2f);
-        Destroy(gameObject);
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (IsActive && other.CompareTag("Hazard"))
+        if (!isPicked && other.CompareTag("Hazard"))
         {
-            timer = 0;
+            //Arkada kalanı düşür
+            Destroy(other.gameObject);
+        }
+        else if (other.CompareTag("FinishLine"))
+        {
+            Debug.Log("GAME WİN");
+            GameManager.Instance.isGameOver = true;
+            GameManager.Instance.m_CollisionDetection.Player.transform.DOMoveZ(GameManager.Instance.m_CollisionDetection.Player.transform.position.z + 5, 2f).OnComplete(() =>
+            {
+                StartCoroutine(GameManager.Instance.WaitAndGameWin());
+            });
         }
     }
 }
