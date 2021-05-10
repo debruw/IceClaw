@@ -17,7 +17,7 @@ public class GameManager : MonoBehaviour
     public ShipController m_ShipController;
     public ClawController m_ClawController;
     public CollisionDetection m_CollisionDetection;
-    public CameraShake m_CameraShake;
+    public CameraController m_CameraShake;
 
     #region UI Elements
     public GameObject WinPanel, LosePanel, InGamePanel;
@@ -25,6 +25,7 @@ public class GameManager : MonoBehaviour
     public Sprite on, off;
     public Text LevelText;
     public GameObject PlayText, ContinueText;
+    public GameObject floatingJoystick;
     #endregion
 
     private void Awake()
@@ -54,7 +55,7 @@ public class GameManager : MonoBehaviour
                 VibrationButton.GetComponent<Image>().sprite = off;
             }
         }
-
+        PlayerPrefs.SetInt("FromMenu", 1);
         if (PlayerPrefs.GetInt("FromMenu") == 1)
         {
             ContinueText.SetActive(false);
@@ -76,6 +77,7 @@ public class GameManager : MonoBehaviour
     public IEnumerator WaitAndGameWin()
     {
         isGameOver = true;
+        floatingJoystick.SetActive(false);
         //SoundManager.Instance.StopAllSounds();
         //SoundManager.Instance.playSound(SoundManager.GameSounds.Win);
 
@@ -92,6 +94,7 @@ public class GameManager : MonoBehaviour
     public IEnumerator WaitAndGameLose()
     {
         isGameOver = true;
+        floatingJoystick.SetActive(false);
         //SoundManager.Instance.playSound(SoundManager.GameSounds.Lose);
 
         yield return new WaitForSeconds(1f);
@@ -130,7 +133,8 @@ public class GameManager : MonoBehaviour
 
     public void TapToStartButtonClick()
     {
-
+        isGameStarted = true;
+        floatingJoystick.SetActive(true);
     }
 
     public void VibrateButtonClick()

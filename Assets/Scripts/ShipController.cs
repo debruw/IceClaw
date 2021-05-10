@@ -6,7 +6,7 @@ public class ShipController : MonoBehaviour
 {
     [SerializeField] float speed;
     public List<Glacier> ShipsGlaciers;
-
+    public Animator m_Animator;
 
     private void Start()
     {
@@ -23,11 +23,16 @@ public class ShipController : MonoBehaviour
         transform.position += new Vector3(0, 0, 1) * speed * Time.deltaTime;
     }
 
+    public void Sink()
+    {
+        StartCoroutine(GameManager.Instance.WaitAndGameLose());
+    }
+
     public void BreakLastGlacier()
     {
         if (!ShipsGlaciers[1].isLast)
         {
-            ShipsGlaciers[1].isLast = true;            
+            ShipsGlaciers[1].isLast = true;
         }
         ShipsGlaciers[0].BreakAll();
     }

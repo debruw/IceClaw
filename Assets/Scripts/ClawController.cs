@@ -5,7 +5,7 @@ using UnityEngine;
 public class ClawController : MonoBehaviour
 {
     [SerializeField] FloatingJoystick MyJoystick;
-    public float speed;    
+    public float speed;
 
     Vector2 xClamp, zClamp;
     Vector3 startPos;
@@ -29,10 +29,10 @@ public class ClawController : MonoBehaviour
         if (isActive)
         {
             Vector3 direction = Vector3.forward * MyJoystick.Vertical + Vector3.right * MyJoystick.Horizontal;
-            transform.position += direction * speed * Time.fixedDeltaTime;
+            transform.position += direction * speed * Time.deltaTime;
 
             transform.localPosition = new Vector3(Mathf.Clamp(transform.localPosition.x, xClamp.x, xClamp.y), transform.localPosition.y, Mathf.Clamp(transform.localPosition.z, zClamp.x, zClamp.y));
-            Body.transform.localEulerAngles = new Vector3(bodyStartRotationX, Mathf.Clamp(Body.transform.localEulerAngles.y + direction.x, 0, 180), 0); 
+            Body.transform.localEulerAngles = new Vector3(bodyStartRotationX, Mathf.Clamp(Body.transform.localEulerAngles.y + direction.x, 0, 180), 0);
         }
     }
 
@@ -50,41 +50,4 @@ public class ClawController : MonoBehaviour
             Arm4.transform.localRotation = new Quaternion(0, 0, Arm4.transform.localRotation.z, Arm4.transform.localRotation.w);
         }
     }
-
-    #region
-    [SerializeField] Transform LeftBack, RightBack;
-    RaycastHit hit;
-    bool isFalled;
-
-    public void CheckGround()
-    {
-        if (isFalled)
-        {
-            return;
-        }
-        if (Physics.Raycast(LeftBack.position, Vector3.down, out hit, 1))
-        {
-            Debug.DrawRay(LeftBack.position, Vector3.down * hit.distance, Color.blue);
-        }
-        else
-        {
-            Debug.DrawRay(LeftBack.position, Vector3.down * 1, Color.red);
-            Debug.Log("FALL LEFT");
-            isFalled = true;
-            //Fall Left
-        }
-
-        if (Physics.Raycast(RightBack.position, Vector3.down, out hit, 1))
-        {
-            Debug.DrawRay(RightBack.position, Vector3.down * hit.distance, Color.blue);
-        }
-        else
-        {
-            Debug.DrawRay(RightBack.position, Vector3.down * 1, Color.red);
-            Debug.Log("FALL RİGHT");
-            isFalled = true;
-            //Fall Right
-        }
-    }
-    #endregion
 }
