@@ -5359,6 +5359,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1165909483617527135, guid: d4864550665a02845b57f7c27a34d177,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2043706991683249922, guid: d4864550665a02845b57f7c27a34d177,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5715544184454527880, guid: d4864550665a02845b57f7c27a34d177,
         type: 3}
       propertyPath: m_ShipController
@@ -5433,6 +5443,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: GameManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 6500134504559242963, guid: d4864550665a02845b57f7c27a34d177,
+        type: 3}
+      propertyPath: m_RaycastTarget
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8763914641730995251, guid: d4864550665a02845b57f7c27a34d177,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d4864550665a02845b57f7c27a34d177, type: 3}
