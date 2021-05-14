@@ -17,7 +17,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &6678165846780576232
 RectTransform:
   m_ObjectHideFlags: 0
@@ -297,7 +297,7 @@ MonoBehaviour:
   isGameStarted: 0
   isGameOver: 0
   m_ShipController: {fileID: 0}
-  m_PlayerController: {fileID: 0}
+  m_ClawController: {fileID: 0}
   m_CollisionDetection: {fileID: 0}
   m_CameraShake: {fileID: 0}
   WinPanel: {fileID: 5859604233205174670}
