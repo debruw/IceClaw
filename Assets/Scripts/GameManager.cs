@@ -15,7 +15,7 @@ public class GameManager : MonoBehaviour
     public bool isGameStarted, isGameOver;
 
     public ShipController m_ShipController;
-    public PlayerController m_PlayerController;
+    public ClawController m_ClawController;
     public CollisionDetection m_CollisionDetection;
     public CameraController m_CameraShake;
 
@@ -25,12 +25,11 @@ public class GameManager : MonoBehaviour
     public Sprite on, off;
     public Text LevelText;
     public GameObject PlayText, ContinueText;
-    public GameObject fixedJoystick;
+    public GameObject floatingJoystick;
     #endregion
 
     private void Awake()
     {
-        Application.targetFrameRate = 60;
         if (_instance != null && _instance != this)
         {
             Destroy(this.gameObject);
@@ -78,7 +77,7 @@ public class GameManager : MonoBehaviour
     public IEnumerator WaitAndGameWin()
     {
         isGameOver = true;
-        fixedJoystick.SetActive(false);
+        floatingJoystick.SetActive(false);
         //SoundManager.Instance.StopAllSounds();
         //SoundManager.Instance.playSound(SoundManager.GameSounds.Win);
 
@@ -95,7 +94,7 @@ public class GameManager : MonoBehaviour
     public IEnumerator WaitAndGameLose()
     {
         isGameOver = true;
-        fixedJoystick.SetActive(false);
+        floatingJoystick.SetActive(false);
         //SoundManager.Instance.playSound(SoundManager.GameSounds.Lose);
 
         yield return new WaitForSeconds(1f);
@@ -135,7 +134,7 @@ public class GameManager : MonoBehaviour
     public void TapToStartButtonClick()
     {
         isGameStarted = true;
-        fixedJoystick.SetActive(true);
+        floatingJoystick.SetActive(true);
     }
 
     public void VibrateButtonClick()
