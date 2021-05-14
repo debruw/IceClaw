@@ -6,12 +6,12 @@ using DG.Tweening;
 public class Glacier : MonoBehaviour
 {
     public float LifeTime;
-    float timer;
+    public float timer;
     public int count;
-    [SerializeField] MeshRenderer myMeshRenderer;
-    [SerializeField] GameObject BrokenGlacier;
-    public bool isPicked, isLast;
-    [SerializeField] GameObject[] ChildObjects;
+    public MeshRenderer myMeshRenderer;
+    public bool isPicked, isLast, isCreated;
+    public GameObject[] ChildObjects;
+    public GameObject BrokenGlacier;
 
     private void Start()
     {
@@ -24,7 +24,7 @@ public class Glacier : MonoBehaviour
         {
             return;
         }
-        if (isLast)
+        if (isLast && isCreated)
         {
             timer -= Time.deltaTime;
             if (timer <= 0 && count <= 20)
@@ -33,12 +33,11 @@ public class Glacier : MonoBehaviour
                 {
                     myMeshRenderer.enabled = false;
                     myMeshRenderer.GetComponent<Collider>().enabled = false;
-                    BrokenGlacier.SetActive(true);
                 }
                 else if (count == 10)
                 {
                     GameManager.Instance.m_ShipController.ShipsGlaciers[1].isLast = true;
-
+                    GameManager.Instance.m_ShipController.ShipsGlaciers[1].CreateBrokenPieces(BrokenGlacier);
                 }
                 else if (count == 15)
                 {
@@ -63,6 +62,19 @@ public class Glacier : MonoBehaviour
         }
     }
 
+    public void CreateBrokenPieces(GameObject broken)
+    {
+        GameObject broke = Instantiate(broken);
+        broke.transform.parent = transform;
+        broke.transform.localPosition = Vector3.zero;
+        ChildObjects = new GameObject[21];
+        for (int i = 0; i < broke.transform.childCount; i++)
+        {
+            ChildObjects[i] = broke.transform.GetChild(i).gameObject;
+        }
+        isCreated = true;
+    }
+
     public void ActivateObject(Transform emptySlot)
     {
         isPicked = true;
@@ -72,7 +84,7 @@ public class Glacier : MonoBehaviour
     public void BreakAll()
     {
         isLast = false;
-        for (int i = count; i <= 20; i++)
+        for (int i = count; i < ChildObjects.Length; i++)
         {
             ChildObjects[i].GetComponent<Rigidbody>().useGravity = true;
             ChildObjects[i].GetComponent<Rigidbody>().velocity = new Vector3(0, 0, Random.Range(-1.5f, -1f));
@@ -102,11 +114,8 @@ public class Glacier : MonoBehaviour
             {
                 GameManager.Instance.isGameOver = true;
                 StartCoroutine(GameManager.Instance.WaitAndGameWin());
-                GameManager.Instance.m_CollisionDetection.Player.transform.DOMoveZ(GameManager.Instance.m_CollisionDetection.Player.transform.position.z + 5, 1f).OnComplete(() =>
-                {
-
-                });
-            } 
+                GameManager.Instance.m_CollisionDetection.Player.transform.DOMoveZ(GameManager.Instance.m_CollisionDetection.Player.transform.position.z + 5, 1f);
+            }
         }
     }
 }

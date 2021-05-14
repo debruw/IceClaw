@@ -48,6 +48,7 @@ public class CollisionDetection : MonoBehaviour
                 }
                 clawController.isActive = false;
                 isEmpty = false;
+                RightIKTarget.transform.position = new Vector3(other.transform.position.x, RightIKTarget.position.y, other.transform.position.z);
                 RightIKTarget.DOMoveX(EmptySlots[nextSlot].transform.position.x, .8f).OnComplete(() =>
                 {
                     clawController.isActive = true;

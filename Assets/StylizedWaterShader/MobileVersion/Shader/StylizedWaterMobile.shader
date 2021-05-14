@@ -39,7 +39,7 @@ Shader "Marc Sureda/Mobile/StylizedWaterMobile" {
             #include "UnityCG.cginc"
             #pragma multi_compile_fwdbase_fullshadows
             #pragma multi_compile_fog
-            #pragma only_renderers d3d9 d3d11 glcore gles gles3 metal d3d11_9x xboxone ps4 switch 
+            /#pragma only_renderers d3d9 d3d11 glcore gles gles3 metal d3d11_9x xboxone ps4 switch 
             #pragma target 2.0
             uniform sampler2D _CameraDepthTexture;
             uniform float _Gradient2;

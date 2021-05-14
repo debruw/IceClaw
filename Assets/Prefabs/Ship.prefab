@@ -211,6 +211,8 @@ MonoBehaviour:
   - {fileID: 3821363247287101714}
   - {fileID: 7554982887032547120}
   m_Animator: {fileID: 8521781802078511789}
+  BrokenGlacier: {fileID: 3058010777053005308, guid: 805b641abedfdb7458551041a015a48b,
+    type: 3}
 --- !u!95 &8521781802078511789
 Animator:
   serializedVersion: 3
@@ -219,7 +221,7 @@ Animator:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8521781802952629028}
-  m_Enabled: 0
+  m_Enabled: 1
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: 1c0f152263fc0fc4cbfa6eebdabcef75, type: 2}
   m_CullingMode: 0
@@ -239,8 +241,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8521781803452395606}
-  - component: {fileID: 8521781803452395604}
-  - component: {fileID: 8521781803452395605}
   m_Layer: 0
   m_Name: ExcavatorRoot
   m_TagString: Untagged
@@ -264,41 +264,6 @@ Transform:
   m_Father: {fileID: 8521781802575284367}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!95 &8521781803452395604
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8521781803452395607}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &8521781803452395605
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8521781803452395607}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fff0960ef4ea6e04eac66b4a7fd2189d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_RigLayers:
-  - rig: {fileID: 0}
-    active: 1
-  m_Effectors: []
 --- !u!1001 &1420813577811140608
 PrefabInstance:
   m_ObjectHideFlags: 0

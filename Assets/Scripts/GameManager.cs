@@ -38,6 +38,7 @@ public class GameManager : MonoBehaviour
         {
             _instance = this;
         }
+        Application.targetFrameRate = 60;
 
         if (!PlayerPrefs.HasKey("VIBRATION"))
         {
