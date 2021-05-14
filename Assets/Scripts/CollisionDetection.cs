@@ -10,10 +10,10 @@ public class CollisionDetection : MonoBehaviour
     int nextSlot = 1;
     public GameObject[] EmptySlots;
     float MoveStep;
-    [SerializeField] Transform RightIKTarget;
+    public Transform RightIKTarget;
     [SerializeField] ClawController clawController;
     [SerializeField] Transform HazardPoint1, HazardPoint2;
-    bool isEmpty;
+    public bool isEmpty;
 
     private void Start()
     {
