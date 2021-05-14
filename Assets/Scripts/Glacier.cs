@@ -64,6 +64,7 @@ public class Glacier : MonoBehaviour
 
     public void CreateBrokenPieces(GameObject broken)
     {
+        myMeshRenderer.enabled = false;
         GameObject broke = Instantiate(broken);
         broke.transform.parent = transform;
         broke.transform.localPosition = Vector3.zero;
@@ -74,10 +75,11 @@ public class Glacier : MonoBehaviour
         }
         isCreated = true;
     }
-
+    [SerializeField] Color EndColor;
     public void ActivateObject(Transform emptySlot)
     {
         isPicked = true;
+        myMeshRenderer.material.DOColor(EndColor,.8f);
         transform.DOMove(emptySlot.position, .8f);
     }
 
@@ -90,6 +92,7 @@ public class Glacier : MonoBehaviour
             ChildObjects[i].GetComponent<Rigidbody>().velocity = new Vector3(0, 0, Random.Range(-1.5f, -1f));
         }
         GameManager.Instance.m_ShipController.ShipsGlaciers.Remove(this);
+        
         Destroy(gameObject, 2f);
     }
 
@@ -115,6 +118,24 @@ public class Glacier : MonoBehaviour
                 GameManager.Instance.isGameOver = true;
                 StartCoroutine(GameManager.Instance.WaitAndGameWin());
                 GameManager.Instance.m_CollisionDetection.Player.transform.DOMoveZ(GameManager.Instance.m_CollisionDetection.Player.transform.position.z + 5, 1f);
+            }
+            else if (other.CompareTag("Glacier") && !other.GetComponent<Glacier>().isPicked)
+            {
+                other.GetComponent<Collider>().enabled = false;
+                other.GetComponent<Glacier>().CreateBrokenPieces(BrokenGlacier);
+                other.GetComponent<Glacier>().BreakAll();
+                GameManager.Instance.m_ShipController.BreakLastGlacier();
+                other.GetComponent<Rigidbody>().useGravity = true;
+                other.GetComponent<Rigidbody>().velocity = new Vector3(0, 0, 2f);
+                GameManager.Instance.ShakeCamera();
+                GameManager.Instance.m_ShipController.ShipsGlaciers.Remove(other.GetComponent<Glacier>());
+                if (GameManager.Instance.m_ShipController.ShipsGlaciers.Count == 2)
+                {
+                    GameManager.Instance.m_ShipController.m_Animator.enabled = true;
+                    GameManager.Instance.m_ShipController.transform.DOMoveY(-15, 5);
+                    GameManager.Instance.m_ShipController.m_Animator.SetTrigger("Sink");
+                }
+                Destroy(other.gameObject, 2f);
             }
         }
     }

@@ -45,40 +45,40 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Floats:
     - _Cutoff: 0.5
-    - _FresnelExp: 5
+    - _FresnelExp: 3.5587187
     - _GradientPosition1: 2.3328786
     - _GradientPosition2: 2.5
     - _LightColorIntensity: 1
     - _MainFoamIntensity: 80
-    - _MainFoamOpacity: 0.8
-    - _MainFoamScale: 500
-    - _MainFoamSpeed: 0.2
-    - _Opacity: 0.33
-    - _OpacityDepth: 15
+    - _MainFoamOpacity: 0.5
+    - _MainFoamScale: 80
+    - _MainFoamSpeed: 0.12
+    - _Opacity: 0.438
+    - _OpacityDepth: 34
     - _RealTimeReflection: 0
     - _ReflectionsIntensity: 1.33
     - _RefractionIntensity: 1.71
     - _Roughness: 0.316
-    - _SecondaryFoamAlwaysVisible: 0
+    - _SecondaryFoamAlwaysVisible: 1
     - _SecondaryFoamIntensity: 100
-    - _SecondaryFoamOpacity: 0.5
-    - _SecondaryFoamScale: 100
+    - _SecondaryFoamOpacity: 1
+    - _SecondaryFoamScale: 25.6
     - _ShadowIntensity: 1
     - _Shadows: 1
     - _ShadowsIntensity: 1
     - _SpecularIntensity: 0.819
     - _TurbulenceDistortionIntesity: 0.73
     - _TurbulenceScale: 15.53
-    - _VertexOffset: 0
+    - _VertexOffset: 1
     - _WaveDistortionIntensity: 0.59
-    - _WavesAmplitude: 3.74
-    - _WavesDirection: 77
-    - _WavesIntensity: 1.97
+    - _WavesAmplitude: 1
+    - _WavesDirection: 240
+    - _WavesIntensity: 0.5
     - _WavesSpeed: 1
     m_Colors:
-    - _DepthGradient1: {r: 0.25025743, g: 1, b: 1, a: 1}
-    - _DepthGradient2: {r: 0.21286374, g: 0.85, b: 0.85, a: 1}
-    - _DepthGradient3: {r: 0.1998947, g: 0.7617647, b: 0.8, a: 1}
-    - _FoamColor: {r: 0.9, g: 0.97931224, b: 1, a: 1}
-    - _FresnelColor: {r: 1, g: 1, b: 1, a: 1}
+    - _DepthGradient1: {r: 0.050984778, g: 0.12082254, b: 0.20501462, a: 1}
+    - _DepthGradient2: {r: 0.16329506, g: 0.40438342, b: 0.65999997, a: 1}
+    - _DepthGradient3: {r: 0.19908538, g: 0.5231896, b: 0.8, a: 1}
+    - _FoamColor: {r: 0.6, g: 0.852174, b: 1, a: 1}
+    - _FresnelColor: {r: 0.52358484, g: 1, b: 0.95228666, a: 1}
     - _ShadowColor: {r: 0.009191178, g: 0.033871744, b: 0.125, a: 1}
