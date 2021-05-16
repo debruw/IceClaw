@@ -51,6 +51,8 @@ public class CollisionDetection : MonoBehaviour
                 RightIKTarget.transform.position = new Vector3(other.transform.position.x, RightIKTarget.position.y, other.transform.position.z);
                 RightIKTarget.DOMoveX(EmptySlots[nextSlot].transform.position.x, .8f).OnComplete(() =>
                 {
+                    RightIKTarget.transform.DOLocalMoveX(GameManager.Instance.m_ClawController.MyJoystick.startPosition.x, .5f);
+                    RightIKTarget.transform.DOLocalMoveZ(GameManager.Instance.m_ClawController.MyJoystick.startPosition.z, .5f);
                     clawController.isActive = true;
                     isEmpty = true;
                 });

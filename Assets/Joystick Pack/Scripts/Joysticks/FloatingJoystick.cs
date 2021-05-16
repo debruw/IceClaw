@@ -7,7 +7,7 @@ using DG.Tweening;
 public class FloatingJoystick : Joystick
 {
     public GameObject RightIKTarget;
-    Vector3 startPosition;
+    public Vector3 startPosition;
 
     protected override void Start()
     {

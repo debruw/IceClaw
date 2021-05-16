@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ClawController : MonoBehaviour
 {
-    [SerializeField] FloatingJoystick MyJoystick;
+    public FloatingJoystick MyJoystick;
     public float speed;
 
     Vector2 xClamp, zClamp;
