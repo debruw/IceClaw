@@ -59,7 +59,7 @@ MonoBehaviour:
   TapToStartButton: {fileID: 5859604233807491049}
   on: {fileID: 21300000, guid: 6bb6315c143654a4793e1bcc00886f09, type: 3}
   off: {fileID: 21300000, guid: 9dbe81f459e65264aaa951bc59994b40, type: 3}
-  LevelText: {fileID: 3738184600871397979}
+  LevelText: {fileID: 9115494653062983726}
   PlayText: {fileID: 5859604232771482515}
   ContinueText: {fileID: 5859604234194491354}
   floatingJoystick: {fileID: 4482074150977194670}
@@ -365,9 +365,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &3738184600871397979 stripped
+--- !u!114 &9115494653062983726 stripped
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8984965144848132390, guid: 1cf6fb652a171e9469439abb8891796c,
+  m_CorrespondingSourceObject: {fileID: 3589667077326943059, guid: 1cf6fb652a171e9469439abb8891796c,
     type: 3}
   m_PrefabInstance: {fileID: 5715544184618091389}
   m_PrefabAsset: {fileID: 0}

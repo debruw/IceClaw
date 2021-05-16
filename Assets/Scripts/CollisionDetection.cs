@@ -74,6 +74,8 @@ public class CollisionDetection : MonoBehaviour
                 other.transform.DOMove(HazardPoint1.position, .5f);
                 RightIKTarget.DOMoveX(HazardPoint1.position.x, .5f).OnComplete(() =>
                 {
+                    RightIKTarget.transform.DOLocalMoveX(GameManager.Instance.m_ClawController.MyJoystick.startPosition.x, .5f);
+                    RightIKTarget.transform.DOLocalMoveZ(GameManager.Instance.m_ClawController.MyJoystick.startPosition.z, .5f);
                     clawController.isActive = true;
                     isEmpty = true;
                 });
@@ -84,6 +86,8 @@ public class CollisionDetection : MonoBehaviour
                 other.transform.DOMove(HazardPoint2.position, .5f);
                 RightIKTarget.DOMoveX(HazardPoint2.position.x, .5f).OnComplete(() =>
                 {
+                    RightIKTarget.transform.DOLocalMoveX(GameManager.Instance.m_ClawController.MyJoystick.startPosition.x, .5f);
+                    RightIKTarget.transform.DOLocalMoveZ(GameManager.Instance.m_ClawController.MyJoystick.startPosition.z, .5f);
                     clawController.isActive = true;
                     isEmpty = true;
                 });
