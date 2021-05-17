@@ -27,7 +27,7 @@ public class CollisionDetection : MonoBehaviour
         Player.transform.DOLocalMoveZ(Player.transform.localPosition.z + (MoveStep / 2), 1.5f);
         EmptySlots[nextSlot].transform.DOLocalMoveZ(EmptySlots[nextSlot].transform.localPosition.z + MoveStep, 0);
     }
-
+    Vector3 middlePoint;
     private void OnTriggerEnter(Collider other)
     {
         if (GameManager.Instance.isGameOver || !GameManager.Instance.isGameStarted || !isEmpty)
@@ -48,16 +48,23 @@ public class CollisionDetection : MonoBehaviour
                 }
                 clawController.isActive = false;
                 isEmpty = false;
+
+                middlePoint = new Vector3((other.transform.position.x - shipController.transform.position.x) / 2, 0, (other.transform.position.z - shipController.transform.position.z) / 2);
+
                 RightIKTarget.transform.position = new Vector3(other.transform.position.x, RightIKTarget.position.y, other.transform.position.z);
-                RightIKTarget.DOMoveX(EmptySlots[nextSlot].transform.position.x, .8f).OnComplete(() =>
+                RightIKTarget.DOMoveX(EmptySlots[nextSlot].transform.position.x + middlePoint.x, .8f).OnComplete(() =>
                 {
                     RightIKTarget.transform.DOLocalMoveX(GameManager.Instance.m_ClawController.MyJoystick.startPosition.x, .5f);
                     RightIKTarget.transform.DOLocalMoveZ(GameManager.Instance.m_ClawController.MyJoystick.startPosition.z, .5f);
                     clawController.isActive = true;
                     isEmpty = true;
                 });
-                RightIKTarget.DOMoveZ(EmptySlots[nextSlot].transform.position.z, .8f);
-                other.GetComponent<Glacier>().ActivateObject(EmptySlots[nextSlot].transform);
+                RightIKTarget.DOMoveZ(EmptySlots[nextSlot].transform.position.z + middlePoint.z, .8f);                
+
+                shipController.transform.DOMoveX(shipController.transform.position.x + middlePoint.x, .8f);
+                shipController.transform.DOMoveZ(shipController.transform.position.z + middlePoint.z, .8f);
+
+                other.GetComponent<Glacier>().ActivateObject(EmptySlots[nextSlot].transform.position + middlePoint);
 
                 StartCoroutine(MovePlayerForward());
                 shipController.ShipsGlaciers.Add(other.GetComponent<Glacier>());

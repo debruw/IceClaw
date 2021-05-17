@@ -76,11 +76,11 @@ public class Glacier : MonoBehaviour
         isCreated = true;
     }
     [SerializeField] Color EndColor;
-    public void ActivateObject(Transform emptySlot)
+    public void ActivateObject(Vector3 emptySlot)
     {
         isPicked = true;
         myMeshRenderer.material.DOColor(EndColor,.8f);
-        transform.DOMove(emptySlot.position, .8f);
+        transform.DOMove(emptySlot, .8f);
     }
 
     public void BreakAll()

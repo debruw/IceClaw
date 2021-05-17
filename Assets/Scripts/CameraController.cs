@@ -16,20 +16,12 @@ public class CameraController : MonoBehaviour
     public float shakeAmount = 0.25f;
     public float decreaseFactor = 1;
 
-    Vector3 originalPos;
-
     public Vector3 offset;
-    private Vector3 velocity;
     public float smoothsTime = .5f;
 
     void Awake()
     {
         offset = transform.position - player.position;
-    }
-
-    void OnEnable()
-    {
-        originalPos = camTransform.localPosition;
     }
 
     void Update()
@@ -41,7 +33,7 @@ public class CameraController : MonoBehaviour
 
         if (shakeDuration > 0)
         {
-            camTransform.localPosition = new Vector3(originalPos.x + Random.insideUnitSphere.x * shakeAmount, transform.localPosition.y, transform.localPosition.z);
+            camTransform.localPosition = new Vector3(0 + Random.insideUnitSphere.x * shakeAmount, transform.localPosition.y, transform.localPosition.z);
 
             shakeDuration -= Time.deltaTime * decreaseFactor;
         }
