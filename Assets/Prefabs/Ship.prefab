@@ -204,7 +204,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49e986d5b88622c4895bbb0299acc35b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 1
+  speed: 2
   ShipsGlaciers:
   - {fileID: 7554982887347448347}
   - {fileID: 7554982885685436171}

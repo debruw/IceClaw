@@ -104,7 +104,10 @@ MonoBehaviour:
   ChildObjects: []
   BrokenGlacier: {fileID: 3058010777053005308, guid: 805b641abedfdb7458551041a015a48b,
     type: 3}
+  BrokenColor: {r: 0.681, g: 0.13918245, b: 0.09941603, a: 1}
+  DefaultColor: {r: 0, g: 0, b: 0, a: 0}
   EndColor: {r: 0.04799997, g: 0.18399996, b: 0.31999996, a: 1}
+  blink: 0
 --- !u!64 &8304156300666366234
 MeshCollider:
   m_ObjectHideFlags: 0

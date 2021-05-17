@@ -1,5 +1,7 @@
-﻿using System.Collections;
+﻿using DG.Tweening;
+using System.Collections;
 using System.Collections.Generic;
+using TapticPlugin;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -11,7 +13,7 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance { get { return _instance; } }
 
     public int currentLevel = 1;
-    int MaxLevelNumber = 3;
+    int MaxLevelNumber = 6;
     public bool isGameStarted, isGameOver;
 
     public ShipController m_ShipController;
@@ -26,6 +28,7 @@ public class GameManager : MonoBehaviour
     public Text LevelText;
     public GameObject PlayText, ContinueText;
     public GameObject floatingJoystick;
+    public GameObject Tutorial;
     #endregion
 
     private void Awake()
@@ -73,19 +76,23 @@ public class GameManager : MonoBehaviour
     public void ShakeCamera()
     {
         m_CameraShake.shakeDuration = .2f;
+        if (PlayerPrefs.GetInt("VIBRATION") == 1)
+            TapticManager.Impact(ImpactFeedback.Medium);
+        // Shake a Vector3 called myVector in 1 second
+        //DOTween.Shake(() => m_CameraShake.transform.position, x => m_CameraShake.transform.position = x, 1, 1, 5, 45, false);
     }
 
     public IEnumerator WaitAndGameWin()
     {
         isGameOver = true;
         floatingJoystick.SetActive(false);
-        //SoundManager.Instance.StopAllSounds();
-        //SoundManager.Instance.playSound(SoundManager.GameSounds.Win);
+        SoundManager.Instance.StopAllSounds();
+        SoundManager.Instance.playSound(SoundManager.GameSounds.Win);
 
         yield return new WaitForSeconds(1f);
 
-        //if (PlayerPrefs.GetInt("VIBRATION") == 1)
-        //    TapticManager.Impact(ImpactFeedback.Light);
+        if (PlayerPrefs.GetInt("VIBRATION") == 1)
+            TapticManager.Impact(ImpactFeedback.Light);
 
         currentLevel++;
         PlayerPrefs.SetInt("LevelId", currentLevel);
@@ -96,12 +103,12 @@ public class GameManager : MonoBehaviour
     {
         isGameOver = true;
         floatingJoystick.SetActive(false);
-        //SoundManager.Instance.playSound(SoundManager.GameSounds.Lose);
+        SoundManager.Instance.playSound(SoundManager.GameSounds.Lose);
 
         yield return new WaitForSeconds(1f);
 
-        //if (PlayerPrefs.GetInt("VIBRATION") == 1)
-        //    TapticManager.Impact(ImpactFeedback.Medium);
+        if (PlayerPrefs.GetInt("VIBRATION") == 1)
+            TapticManager.Impact(ImpactFeedback.Medium);
 
         LosePanel.SetActive(true);
     }
@@ -136,6 +143,10 @@ public class GameManager : MonoBehaviour
     {
         isGameStarted = true;
         floatingJoystick.SetActive(true);
+        if (currentLevel == 1 || currentLevel == 2)
+        {
+            Tutorial.SetActive(true);
+        }
     }
 
     public void VibrateButtonClick()
@@ -151,7 +162,7 @@ public class GameManager : MonoBehaviour
             VibrationButton.GetComponent<Image>().sprite = on;
         }
 
-        //if (PlayerPrefs.GetInt("VIBRATION") == 1)
-        //    TapticManager.Impact(ImpactFeedback.Light);
+        if (PlayerPrefs.GetInt("VIBRATION") == 1)
+            TapticManager.Impact(ImpactFeedback.Light);
     }
 }

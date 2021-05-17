@@ -21,6 +21,11 @@ public class FloatingJoystick : Joystick
     {
         background.anchoredPosition = ScreenPointToAnchoredPosition(eventData.position);
         background.gameObject.SetActive(true);
+        if (GameManager.Instance.currentLevel == 1 || GameManager.Instance.currentLevel == 2)
+        {
+            GameManager.Instance.Tutorial.SetActive(false);
+            GameManager.Instance.m_ShipController.speed = 2;
+        }
         base.OnPointerDown(eventData);
     }
 

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ShipController : MonoBehaviour
 {
-    [SerializeField] float speed;
+    public float speed;
     public List<Glacier> ShipsGlaciers;
     public Animator m_Animator;
     public GameObject BrokenGlacier;

@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: GlacierPickable
+  m_Name: BrokenGlaciers
   m_Shader: {fileID: 4800000, guid: ccfc7d68845db8341944b3091b59be55, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
@@ -86,9 +86,9 @@ Material:
     - _intesity: 0
     - _speed: 3
     m_Colors:
-    - _Color: {r: 0.25411764, g: 0.4447059, b: 0.63529414, a: 1}
+    - _Color: {r: 0.68, g: 0.13897808, b: 0.099270046, a: 1}
     - _EmissionColor: {r: 0.06448024, g: 0.17701328, b: 0.1981132, a: 1}
     - _HColor: {r: 0.75699997, g: 0.75699997, b: 0.75699997, a: 1}
-    - _SColor: {r: 0.28786802, g: 0.379056, b: 0.447, a: 1}
+    - _SColor: {r: 0.287868, g: 0.37905598, b: 0.44699997, a: 1}
     - _Shadow: {r: 0.58147913, g: 0.6886792, b: 0.6886792, a: 1}
     - _Unlit: {r: 0.91211283, g: 0.9716981, b: 0.9716981, a: 1}

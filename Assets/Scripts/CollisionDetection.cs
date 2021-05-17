@@ -69,6 +69,7 @@ public class CollisionDetection : MonoBehaviour
                 StartCoroutine(MovePlayerForward());
                 shipController.ShipsGlaciers.Add(other.GetComponent<Glacier>());
                 other.transform.parent = shipController.transform;
+                SoundManager.Instance.playSound(SoundManager.GameSounds.GlacierMove);
             }
         }
         else if (other.CompareTag("Hazard"))
@@ -100,6 +101,7 @@ public class CollisionDetection : MonoBehaviour
                 });
                 RightIKTarget.DOMoveZ(HazardPoint2.position.z, .5f);
             }
+            SoundManager.Instance.playSound(SoundManager.GameSounds.GlacierMove);
         }
     }
 }
