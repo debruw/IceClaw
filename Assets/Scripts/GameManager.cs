@@ -147,6 +147,10 @@ public class GameManager : MonoBehaviour
         {
             Tutorial.SetActive(true);
         }
+        else
+        {
+            m_ShipController.speed = 2;
+        }
     }
 
     public void VibrateButtonClick()
